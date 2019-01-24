@@ -16,7 +16,8 @@
        limitations under the License.
 
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>net.andreaskluth.spring.boot</groupId>
@@ -31,7 +32,7 @@
 
   <modules>
     <module>mustache-java-spring-boot-autoconfigure</module>
-    <module>mustache-java-spring-boot-starter</module>    
+    <module>mustache-java-spring-boot-starter</module>
     <module>mustache-java-spring-boot-starter-test</module>
     <module>mustache-java-spring-boot-test-autoconfigure</module>
   </modules>
@@ -45,6 +46,8 @@
 
   <properties>
     <spring-boot.version>2.1.2.RELEASE</spring-boot.version>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
   </properties>
 
   <dependencyManagement>
@@ -83,13 +86,5 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
-
-  <dependencies>
-      <dependency>
-        <groupId>org.junit.jupiter</groupId>
-        <artifactId>junit-jupiter-engine</artifactId>
-        <scope>test</scope>
-      </dependency>
-  </dependencies>
 
 </project>
