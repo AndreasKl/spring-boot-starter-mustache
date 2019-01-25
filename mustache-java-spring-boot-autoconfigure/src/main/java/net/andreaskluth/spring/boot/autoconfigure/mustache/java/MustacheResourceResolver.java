@@ -20,20 +20,10 @@ import org.springframework.core.io.ResourceLoader;
  */
 public class MustacheResourceResolver implements MustacheResolver, ResourceLoaderAware {
 
-  private String prefix = "";
-
-  private String suffix = "";
-
   private String charSet = "UTF-8";
-
   private ResourceLoader resourceLoader = new DefaultResourceLoader();
 
   public MustacheResourceResolver() {}
-
-  public MustacheResourceResolver(String prefix, String suffix) {
-    this.prefix = prefix;
-    this.suffix = suffix;
-  }
 
   public void setCharset(String charSet) {
     this.charSet = charSet;
@@ -49,7 +39,7 @@ public class MustacheResourceResolver implements MustacheResolver, ResourceLoade
     try {
       return new InputStreamReader(
           this.resourceLoader
-              .getResource(this.prefix + resourceName + this.suffix)
+              .getResource(resourceName)
               .getInputStream(),
           this.charSet);
     } catch (IOException e) {

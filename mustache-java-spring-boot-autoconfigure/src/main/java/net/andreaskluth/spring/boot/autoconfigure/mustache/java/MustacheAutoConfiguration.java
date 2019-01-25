@@ -1,9 +1,9 @@
 package net.andreaskluth.spring.boot.autoconfigure.mustache.java;
 
-import com.github.mustachejava.MustacheResolver;
-import javax.annotation.PostConstruct;
 import com.github.mustachejava.DefaultMustacheFactory;
 import com.github.mustachejava.Mustache;
+import com.github.mustachejava.MustacheResolver;
+import javax.annotation.PostConstruct;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -14,7 +14,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import org.springframework.core.env.Environment;
 
 @Configuration
 @ConditionalOnClass({Mustache.class})
@@ -25,15 +24,11 @@ public class MustacheAutoConfiguration {
   private static final Log logger = LogFactory.getLog(MustacheAutoConfiguration.class);
 
   private final MustacheProperties mustacheProperties;
-  private final Environment environment;
   private final ApplicationContext applicationContext;
 
   public MustacheAutoConfiguration(
-      MustacheProperties mustacheProperties,
-      Environment environment,
-      ApplicationContext applicationContext) {
+      MustacheProperties mustacheProperties, ApplicationContext applicationContext) {
     this.mustacheProperties = mustacheProperties;
-    this.environment = environment;
     this.applicationContext = applicationContext;
   }
 
@@ -61,9 +56,7 @@ public class MustacheAutoConfiguration {
   @Bean
   @ConditionalOnMissingBean(MustacheResolver.class)
   public MustacheResourceResolver mustacheTemplateLoader() {
-    MustacheResourceResolver loader =
-        new MustacheResourceResolver(
-            this.mustacheProperties.getPrefix(), this.mustacheProperties.getSuffix());
+    MustacheResourceResolver loader = new MustacheResourceResolver();
     loader.setCharset(this.mustacheProperties.getCharsetName());
     return loader;
   }
