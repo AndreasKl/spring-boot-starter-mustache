@@ -28,3 +28,15 @@ hs_err_pid*
 # IDE specific
 .idea/
 *.iml
+
+# VS Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.project
+.classpath
+.settings/
+*/.settings/*
+.factorypath
