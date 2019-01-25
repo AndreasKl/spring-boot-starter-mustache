@@ -7,10 +7,10 @@ import java.util.function.Consumer;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-class MustacheAutoConfigurationTest {
+public class MustacheAutoConfigurationTest {
 
   @Test
-  void beanIsRegistered() {
+  public void beanIsRegistered() {
     withContext(
         (ctx) -> assertThat(ctx.getBeanNamesForType(DefaultMustacheFactory.class)).isNotEmpty());
   }

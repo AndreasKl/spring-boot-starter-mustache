@@ -7,3 +7,4 @@ While extending *mustache.java* and *jmustache* with the same features, I found 
 *mustache.java* was pretty simple whereas the code base of *jmustache* was not on the same level.
 
 [![Build Status](https://travis-ci.org/AndreasKl/mustache.java-spring-boot-starter.svg?branch=master)](https://travis-ci.org/AndreasKl/mustache.java-spring-boot-starter)
+[![codecov](https://codecov.io/gh/AndreasKl/spring-boot-starter-mustache/branch/master/graph/badge.svg)](https://codecov.io/gh/AndreasKl/spring-boot-starter-mustache)
