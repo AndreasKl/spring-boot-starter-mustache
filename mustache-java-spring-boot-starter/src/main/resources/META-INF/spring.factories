@@ -1,3 +1,0 @@
-# Auto Configure
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-net.andreaskluth.spring.boot.autoconfigure.mustache.java.MustacheAutoConfiguration

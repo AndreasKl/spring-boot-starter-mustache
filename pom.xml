@@ -21,26 +21,24 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>net.andreaskluth.spring.boot</groupId>
-  <artifactId>mustache.java-spring-boot</artifactId>
+  <artifactId>spring-boot-starter</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
 
-  <name>mustache.java-spring-boot</name>
+  <name>spring-boot-starter</name>
   <description>Spring Boot Support for spullara mustache.java</description>
-  <url>https://github.com/AndreasKl/mustache.java-spring-boot-starter</url>
+  <url>https://github.com/AndreasKl/spring-boot-starter</url>
   <inceptionYear>2019</inceptionYear>
 
   <modules>
-    <module>mustache-java-spring-boot-autoconfigure</module>
-    <module>mustache-java-spring-boot-starter</module>
-    <module>mustache-java-spring-boot-starter-test</module>
-    <module>mustache-java-spring-boot-test-autoconfigure</module>
+    <module>spring-boot-autoconfigure</module>
+    <module>spring-boot-starter-mustache</module>
   </modules>
 
   <scm>
-    <connection>scm:git:git@github.com:AndreasKl/mustache.java-spring-boot-starter.git</connection>
-    <developerConnection>scm:git:git@github.com:AndreasKl/mustache.java-spring-boot-starter.git</developerConnection>
-    <url>https://github.com/AndreasKl/mustache.java-spring-boot-starter/tree/master</url>
+    <connection>scm:git:git@github.com:AndreasKl/spring-boot-starter-mustache.git</connection>
+    <developerConnection>scm:git:git@github.com:AndreasKl/spring-boot-starter-mustache.git</developerConnection>
+    <url>https://github.com/AndreasKl/spring-boot-starter-mustache/tree/master</url>
     <tag>HEAD</tag>
   </scm>
 
@@ -71,22 +69,12 @@
       </dependency>
       <dependency>
         <groupId>net.andreaskluth.spring.boot</groupId>
-        <artifactId>mustache.java-spring-boot-autoconfigure</artifactId>
+        <artifactId>spring-boot-autoconfigure</artifactId>
         <version>0.0.1-SNAPSHOT</version>
       </dependency>
       <dependency>
         <groupId>net.andreaskluth.spring.boot</groupId>
-        <artifactId>mustache.java-spring-boot-starter</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>net.andreaskluth.spring.boot</groupId>
-        <artifactId>mustache.java-spring-boot-starter-test</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>net.andreaskluth.spring.boot</groupId>
-        <artifactId>mustache.java-spring-boot-test-autoconfigure</artifactId>
+        <artifactId>spring-boot-starter-mustache</artifactId>
         <version>0.0.1-SNAPSHOT</version>
       </dependency>
     </dependencies>
