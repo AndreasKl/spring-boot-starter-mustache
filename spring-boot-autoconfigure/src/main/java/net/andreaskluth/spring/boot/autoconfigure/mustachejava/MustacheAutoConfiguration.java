@@ -34,14 +34,14 @@ public class MustacheAutoConfiguration {
 
   @PostConstruct
   public void checkTemplateLocationExists() {
-    if (this.mustacheProperties.isCheckTemplateLocation()) {
-      TemplateLocation location = new TemplateLocation(this.mustacheProperties.getPrefix());
+    if (mustacheProperties.isCheckTemplateLocation()) {
+      TemplateLocation location = new TemplateLocation(mustacheProperties.getPrefix());
       if (!location.exists(this.applicationContext)) {
         logger.warn(
             "Cannot find template location: "
                 + location
                 + " (please add some templates, check your Mustache "
-                + "configuration, or set spring.mustache."
+                + "configuration, or set spring.mustachejava."
                 + "check-template-location=false)");
       }
     }
@@ -57,7 +57,7 @@ public class MustacheAutoConfiguration {
   @ConditionalOnMissingBean(MustacheResolver.class)
   public MustacheResourceResolver mustacheTemplateLoader() {
     MustacheResourceResolver loader = new MustacheResourceResolver();
-    loader.setCharset(this.mustacheProperties.getCharsetName());
+    loader.setCharset(mustacheProperties.getCharsetName());
     return loader;
   }
 }

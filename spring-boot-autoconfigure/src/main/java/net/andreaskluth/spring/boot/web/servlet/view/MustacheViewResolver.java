@@ -1,6 +1,5 @@
 package net.andreaskluth.spring.boot.web.servlet.view;
 
-import com.github.mustachejava.DefaultMustacheFactory;
 import com.github.mustachejava.MustacheFactory;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.view.AbstractTemplateViewResolver;
@@ -12,15 +11,6 @@ public class MustacheViewResolver extends AbstractTemplateViewResolver {
   private final MustacheFactory factory;
 
   private String charset;
-
-  /**
-   * Create a {@code MustacheViewResolver} backed by a default instance of a {@link
-   * MustacheFactory}.
-   */
-  public MustacheViewResolver() {
-    this.factory = new DefaultMustacheFactory();
-    setViewClass(requiredViewClass());
-  }
 
   /**
    * Create a {@code MustacheViewResolver} backed by a custom instance of a {@link MustacheFactory}.
@@ -49,8 +39,8 @@ public class MustacheViewResolver extends AbstractTemplateViewResolver {
   @Override
   protected AbstractUrlBasedView buildView(String viewName) throws Exception {
     MustacheView view = (MustacheView) super.buildView(viewName);
-    view.setFactory(this.factory);
-    view.setCharset(this.charset);
+    view.setFactory(factory);
+    view.setCharset(charset);
     return view;
   }
 }

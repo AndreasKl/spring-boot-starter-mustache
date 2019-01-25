@@ -6,7 +6,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.core.Ordered;
-import org.springframework.util.Assert;
 import org.springframework.util.MimeType;
 import org.springframework.web.servlet.view.AbstractTemplateViewResolver;
 
@@ -157,33 +156,24 @@ public class MustacheProperties {
   }
 
   /**
-   * Apply the given properties to a {@link AbstractTemplateViewResolver}. Use Object in signature
-   * to avoid runtime dependency on MVC, which means that the template engine can be used in a
-   * non-web application.
+   * Apply the given properties to a {@link AbstractTemplateViewResolver}.
    *
    * @param viewResolver the resolver to apply the properties to.
    */
-  public void applyToMvcViewResolver(Object viewResolver) {
-    Assert.isInstanceOf(
-        AbstractTemplateViewResolver.class,
-        viewResolver,
-        "ViewResolver is not an instance of AbstractTemplateViewResolver :" + viewResolver);
-    AbstractTemplateViewResolver resolver = (AbstractTemplateViewResolver) viewResolver;
-    resolver.setPrefix(getPrefix());
-    resolver.setSuffix(getSuffix());
-    resolver.setCache(isCache());
+  void applyToMvcViewResolver(AbstractTemplateViewResolver viewResolver) {
+    viewResolver.setPrefix(getPrefix());
+    viewResolver.setSuffix(getSuffix());
+    viewResolver.setCache(isCache());
     if (getContentType() != null) {
-      resolver.setContentType(getContentType().toString());
+      viewResolver.setContentType(getContentType().toString());
     }
-    resolver.setViewNames(getViewNames());
-    resolver.setExposeRequestAttributes(isExposeRequestAttributes());
-    resolver.setAllowRequestOverride(isAllowRequestOverride());
-    resolver.setAllowSessionOverride(isAllowSessionOverride());
-    resolver.setExposeSessionAttributes(isExposeSessionAttributes());
-    resolver.setExposeSpringMacroHelpers(isExposeSpringMacroHelpers());
-    resolver.setRequestContextAttribute(getRequestContextAttribute());
-    // The resolver usually acts as a fallback resolver (e.g. like a
-    // InternalResourceViewResolver) so it needs to have low precedence
-    resolver.setOrder(Ordered.LOWEST_PRECEDENCE - 5);
+    viewResolver.setViewNames(getViewNames());
+    viewResolver.setExposeRequestAttributes(isExposeRequestAttributes());
+    viewResolver.setAllowRequestOverride(isAllowRequestOverride());
+    viewResolver.setAllowSessionOverride(isAllowSessionOverride());
+    viewResolver.setExposeSessionAttributes(isExposeSessionAttributes());
+    viewResolver.setExposeSpringMacroHelpers(isExposeSpringMacroHelpers());
+    viewResolver.setRequestContextAttribute(getRequestContextAttribute());
+    viewResolver.setOrder(Ordered.LOWEST_PRECEDENCE - 5);
   }
 }

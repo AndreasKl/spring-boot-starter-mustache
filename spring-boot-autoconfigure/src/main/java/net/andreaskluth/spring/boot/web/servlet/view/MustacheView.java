@@ -22,8 +22,8 @@ public class MustacheView extends AbstractTemplateView {
   /**
    * Set the Mustache factory to be used by this view.
    *
-   * <p>Typically this property is not set directly. Instead a single {@link Compiler} is expected
-   * in the Spring application context which is used to compile Mustache templates.
+   * <p>Typically this property is not set directly. Instead a single {@link MustacheFactory} is
+   * expected in the Spring application context which is used to compile Mustache templates.
    *
    * @param factory the Mustache factory
    */
@@ -41,16 +41,17 @@ public class MustacheView extends AbstractTemplateView {
   }
 
   @Override
-  public boolean checkResource(Locale locale) throws Exception {
-    Resource resource = getApplicationContext().getResource(this.getUrl());
-    return (resource != null && resource.exists());
+  public boolean checkResource(Locale locale) {
+    Resource resource = getApplicationContext().getResource(getUrl());
+    return resource != null && resource.exists();
   }
 
   @Override
   protected void renderMergedTemplateModel(
       Map<String, Object> model, HttpServletRequest request, HttpServletResponse response)
       throws Exception {
-    final Mustache mustache = createMustache(getApplicationContext().getResource(this.getUrl()));
+    Resource resource = getApplicationContext().getResource(getUrl());
+    Mustache mustache = createMustache(resource);
     if (mustache != null) {
       mustache.execute(response.getWriter(), model);
     }
@@ -58,13 +59,13 @@ public class MustacheView extends AbstractTemplateView {
 
   private Mustache createMustache(Resource resource) throws IOException {
     try (Reader reader = getReader(resource)) {
-      return this.factory.compile(reader, this.getUrl());
+      return factory.compile(reader, getUrl());
     }
   }
 
   private Reader getReader(Resource resource) throws IOException {
-    if (this.charset != null) {
-      return new InputStreamReader(resource.getInputStream(), this.charset);
+    if (charset != null) {
+      return new InputStreamReader(resource.getInputStream(), charset);
     }
     return new InputStreamReader(resource.getInputStream());
   }

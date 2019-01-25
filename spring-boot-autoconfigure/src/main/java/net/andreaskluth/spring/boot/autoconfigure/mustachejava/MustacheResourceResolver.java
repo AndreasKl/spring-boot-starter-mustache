@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 
+import java.nio.charset.StandardCharsets;
 import org.springframework.context.ResourceLoaderAware;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
@@ -20,7 +21,7 @@ import org.springframework.core.io.ResourceLoader;
  */
 public class MustacheResourceResolver implements MustacheResolver, ResourceLoaderAware {
 
-  private String charSet = "UTF-8";
+  private String charSet = StandardCharsets.UTF_8.name();
   private ResourceLoader resourceLoader = new DefaultResourceLoader();
 
   public MustacheResourceResolver() {}
@@ -35,13 +36,10 @@ public class MustacheResourceResolver implements MustacheResolver, ResourceLoade
   }
 
   @Override
-  public Reader getReader(final String resourceName) {
+  public Reader getReader(String resourceName) {
     try {
       return new InputStreamReader(
-          this.resourceLoader
-              .getResource(resourceName)
-              .getInputStream(),
-          this.charSet);
+          resourceLoader.getResource(resourceName).getInputStream(), charSet);
     } catch (IOException e) {
       throw new IllegalStateException(e);
     }

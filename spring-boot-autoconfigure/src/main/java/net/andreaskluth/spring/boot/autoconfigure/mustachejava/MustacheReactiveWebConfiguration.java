@@ -23,11 +23,11 @@ class MustacheReactiveWebConfiguration {
   @ConditionalOnMissingBean
   public MustacheViewResolver mustacheViewResolver(MustacheFactory mustacheFactory) {
     MustacheViewResolver resolver = new MustacheViewResolver(mustacheFactory);
-    resolver.setPrefix(this.mustacheProperties.getPrefix());
-    resolver.setSuffix(this.mustacheProperties.getSuffix());
-    resolver.setViewNames(this.mustacheProperties.getViewNames());
-    resolver.setRequestContextAttribute(this.mustacheProperties.getRequestContextAttribute());
-    resolver.setCharset(this.mustacheProperties.getCharsetName());
+    resolver.setPrefix(mustacheProperties.getPrefix());
+    resolver.setSuffix(mustacheProperties.getSuffix());
+    resolver.setViewNames(mustacheProperties.getViewNames());
+    resolver.setRequestContextAttribute(mustacheProperties.getRequestContextAttribute());
+    resolver.setCharset(mustacheProperties.getCharsetName());
     resolver.setOrder(Ordered.LOWEST_PRECEDENCE - 10);
     return resolver;
   }

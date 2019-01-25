@@ -11,17 +11,29 @@ import org.springframework.util.ClassUtils;
  */
 public class MustacheTemplateAvailabilityProvider implements TemplateAvailabilityProvider {
 
+  public static final String MUSTACHE_CLASS_NAME = "com.github.mustachejava.Mustache";
+  public static final String MUSTACHEJAVA_PREFIX = "spring.mustachejava.prefix";
+  public static final String MUSTACHEJAVA_SUFFIX = "spring.mustachejava.suffix";
+
   @Override
   public boolean isTemplateAvailable(
-      String view,
-      Environment environment,
-      ClassLoader classLoader,
-      ResourceLoader resourceLoader) {
-    if (ClassUtils.isPresent("com.github.mustachejava.Mustache", classLoader)) {
-      String prefix = environment.getProperty("spring.mustachejava.prefix", MustacheProperties.DEFAULT_PREFIX);
-      String suffix = environment.getProperty("spring.mustachejava.suffix", MustacheProperties.DEFAULT_SUFFIX);
-      return resourceLoader.getResource(prefix + view + suffix).exists();
-    }
-    return false;
+      String view, Environment env, ClassLoader classLoader, ResourceLoader resourceLoader) {
+    return isMustacheOnClasspath(classLoader) && isResourcePresent(view, env, resourceLoader);
+  }
+
+  private boolean isResourcePresent(String view, Environment env, ResourceLoader resourceLoader) {
+    return resourceLoader.getResource(getSuffix(env) + view + getPrefix(env)).exists();
+  }
+
+  private String getPrefix(Environment environment) {
+    return environment.getProperty(MUSTACHEJAVA_SUFFIX, MustacheProperties.DEFAULT_SUFFIX);
+  }
+
+  private String getSuffix(Environment environment) {
+    return environment.getProperty(MUSTACHEJAVA_PREFIX, MustacheProperties.DEFAULT_PREFIX);
+  }
+
+  private boolean isMustacheOnClasspath(ClassLoader classLoader) {
+    return ClassUtils.isPresent(MUSTACHE_CLASS_NAME, classLoader);
   }
 }
