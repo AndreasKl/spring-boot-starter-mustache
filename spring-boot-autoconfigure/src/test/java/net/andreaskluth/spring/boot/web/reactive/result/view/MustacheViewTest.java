@@ -6,7 +6,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import com.github.mustachejava.MustacheNotFoundException;
-import java.io.FileNotFoundException;
 import java.time.Duration;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
@@ -30,7 +29,7 @@ class MustacheViewTest {
   void rendersNestedTemplate() {
     contextRunner.run(
         ctx -> {
-          String rendered = renderMergedTemplateModel(aMustacheReactiveView(templateUrl, ctx));
+          String rendered = render(aMustacheReactiveView(templateUrl, ctx));
           assertThat(rendered).isEqualTo("fun with a partial");
         });
   }
@@ -41,7 +40,7 @@ class MustacheViewTest {
         ctx -> {
           assertThrows(
               MustacheNotFoundException.class,
-              () -> renderMergedTemplateModel(aMustacheReactiveView(nonExistentPartial, ctx)));
+              () -> render(aMustacheReactiveView(nonExistentPartial, ctx)));
         });
   }
 
@@ -50,14 +49,15 @@ class MustacheViewTest {
     contextRunner.run(
         ctx -> {
           assertThrows(
-              FileNotFoundException.class,
-              () -> renderMergedTemplateModel(aMustacheReactiveView(nonExistentTemplateUrl, ctx)));
+              IllegalStateException.class,
+              () -> render(aMustacheReactiveView(nonExistentTemplateUrl, ctx)));
         });
   }
 
-  private String renderMergedTemplateModel(MustacheView view) {
-    view.render(model, MediaType.TEXT_HTML, anExchange()).block(Duration.ofSeconds(5));
-    return anExchange().getResponse().getBodyAsString().block(Duration.ofSeconds(5));
+  private String render(MustacheView view) {
+    MockServerWebExchange exchange = anExchange();
+    view.render(model, MediaType.TEXT_HTML, exchange).block(Duration.ofSeconds(5));
+    return exchange.getResponse().getBodyAsString().block(Duration.ofSeconds(5));
   }
 
   private MockServerWebExchange anExchange() {
