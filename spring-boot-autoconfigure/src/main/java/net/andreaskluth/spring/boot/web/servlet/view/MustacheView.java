@@ -27,7 +27,7 @@ public class MustacheView extends AbstractTemplateView {
    *
    * @param factory the Mustache factory
    */
-  public void setFactory(MustacheFactory factory) {
+  public void setMustacheFactory(MustacheFactory factory) {
     this.factory = factory;
   }
 

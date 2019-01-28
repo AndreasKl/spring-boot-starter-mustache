@@ -38,7 +38,7 @@ public class MustacheViewResolver extends AbstractTemplateViewResolver {
   @Override
   protected AbstractUrlBasedView buildView(String viewName) throws Exception {
     MustacheView view = (MustacheView) super.buildView(viewName);
-    view.setFactory(factory);
+    view.setMustacheFactory(factory);
     view.setCharset(charset);
     return view;
   }

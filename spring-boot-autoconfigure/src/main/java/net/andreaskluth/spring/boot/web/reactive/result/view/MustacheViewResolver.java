@@ -32,7 +32,7 @@ public class MustacheViewResolver extends UrlBasedViewResolver {
 
   @Override
   protected Class<?> requiredViewClass() {
-    return org.springframework.boot.web.reactive.result.view.MustacheView.class;
+    return MustacheView.class;
   }
 
   @Override

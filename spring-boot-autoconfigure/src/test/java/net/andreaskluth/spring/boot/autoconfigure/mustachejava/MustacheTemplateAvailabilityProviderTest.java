@@ -12,11 +12,11 @@ import org.springframework.util.ClassUtils;
 
 class MustacheTemplateAvailabilityProviderTest {
 
-  AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
+  AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
 
   @AfterEach
   void cleanup() {
-    context.close();
+    ctx.close();
   }
 
   @Test
@@ -27,7 +27,7 @@ class MustacheTemplateAvailabilityProviderTest {
 
   private boolean isTemplateAvailable(String view) {
     return anAvailabilityProvider()
-        .isTemplateAvailable(view, anEnvironment(), ClassUtils.getDefaultClassLoader(), context);
+        .isTemplateAvailable(view, anEnvironment(), ClassUtils.getDefaultClassLoader(), ctx);
   }
 
   private MockEnvironment anEnvironment() {
