@@ -48,7 +48,7 @@ public class MustacheView extends AbstractUrlBasedView {
   }
 
   @Override
-  public boolean checkResourceExists(Locale locale) throws Exception {
+  public boolean checkResourceExists(Locale locale) {
     return resolveResource() != null;
   }
 

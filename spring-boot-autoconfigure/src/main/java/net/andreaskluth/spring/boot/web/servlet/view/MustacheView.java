@@ -43,7 +43,7 @@ public class MustacheView extends AbstractTemplateView {
   @Override
   public boolean checkResource(Locale locale) {
     Resource resource = getApplicationContext().getResource(getUrl());
-    return resource != null && resource.exists();
+    return resource.exists();
   }
 
   @Override
@@ -52,9 +52,7 @@ public class MustacheView extends AbstractTemplateView {
       throws Exception {
     Resource resource = getApplicationContext().getResource(getUrl());
     Mustache mustache = createMustache(resource);
-    if (mustache != null) {
-      mustache.execute(response.getWriter(), model);
-    }
+    mustache.execute(response.getWriter(), model);
   }
 
   private Mustache createMustache(Resource resource) throws IOException {
