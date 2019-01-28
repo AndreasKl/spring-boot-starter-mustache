@@ -5,11 +5,10 @@ import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.view.AbstractTemplateViewResolver;
 import org.springframework.web.servlet.view.AbstractUrlBasedView;
 
-/** Spring MVC {@link ViewResolver} for Mustache. */
+/** Spring MVC {@link ViewResolver} for mustache.java. */
 public class MustacheViewResolver extends AbstractTemplateViewResolver {
 
   private final MustacheFactory factory;
-
   private String charset;
 
   /**

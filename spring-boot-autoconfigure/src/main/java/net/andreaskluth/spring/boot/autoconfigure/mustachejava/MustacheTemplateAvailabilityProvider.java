@@ -6,14 +6,14 @@ import org.springframework.core.io.ResourceLoader;
 import org.springframework.util.ClassUtils;
 
 /**
- * {@link TemplateAvailabilityProvider} that provides availability information for Mustache view
+ * {@link TemplateAvailabilityProvider} that provides availability information for mustache.java view
  * templates.
  */
 public class MustacheTemplateAvailabilityProvider implements TemplateAvailabilityProvider {
 
   public static final String MUSTACHE_CLASS_NAME = "com.github.mustachejava.Mustache";
-  public static final String MUSTACHEJAVA_PREFIX = "spring.mustachejava.prefix";
-  public static final String MUSTACHEJAVA_SUFFIX = "spring.mustachejava.suffix";
+  public static final String MUSTACHEJAVA_PREFIX = "mustachejava.prefix";
+  public static final String MUSTACHEJAVA_SUFFIX = "mustachejava.suffix";
 
   @Override
   public boolean isTemplateAvailable(

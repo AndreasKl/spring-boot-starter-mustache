@@ -41,8 +41,7 @@ public class MustacheAutoConfiguration {
             "Cannot find template location: "
                 + location
                 + " (please add some templates, check your Mustache "
-                + "configuration, or set spring.mustachejava."
-                + "check-template-location=false)");
+                + "configuration, or set mustachejava.check-template-location=false)");
       }
     }
   }

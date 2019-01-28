@@ -5,17 +5,16 @@ import java.nio.charset.StandardCharsets;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.core.Ordered;
 import org.springframework.util.MimeType;
-import org.springframework.web.servlet.view.AbstractTemplateViewResolver;
+import org.springframework.util.MimeTypeUtils;
 
-/** {@link ConfigurationProperties} for Mustache. */
-@ConfigurationProperties(prefix = "spring.mustachejava")
+/** {@link ConfigurationProperties} for mustache.java. */
+@ConfigurationProperties(prefix = "mustachejava")
 public class MustacheProperties {
 
   public static final String DEFAULT_PREFIX = "classpath:/templates/";
   public static final String DEFAULT_SUFFIX = ".mustache";
-  private static final MimeType DEFAULT_CONTENT_TYPE = MimeType.valueOf("text/html");
+  private static final MimeType DEFAULT_CONTENT_TYPE = MimeTypeUtils.TEXT_HTML;
   private static final Charset DEFAULT_CHARSET = StandardCharsets.UTF_8;
 
   private String prefix = DEFAULT_PREFIX;
@@ -27,7 +26,7 @@ public class MustacheProperties {
   private boolean exposeSpringMacroHelpers = true;
   private boolean allowSessionOverride = false;
   private boolean enabled = true;
-  private boolean cache;
+  private boolean cache = true;
   private MimeType contentType = DEFAULT_CONTENT_TYPE;
   private Charset charset = DEFAULT_CHARSET;
   private String[] viewNames;
@@ -38,7 +37,7 @@ public class MustacheProperties {
   }
 
   public boolean isEnabled() {
-    return this.enabled;
+    return enabled;
   }
 
   public void setCheckTemplateLocation(boolean checkTemplateLocation) {
@@ -46,11 +45,11 @@ public class MustacheProperties {
   }
 
   public boolean isCheckTemplateLocation() {
-    return this.checkTemplateLocation;
+    return checkTemplateLocation;
   }
 
   public String[] getViewNames() {
-    return this.viewNames;
+    return viewNames;
   }
 
   public void setViewNames(String[] viewNames) {
@@ -58,7 +57,7 @@ public class MustacheProperties {
   }
 
   public boolean isCache() {
-    return this.cache;
+    return cache;
   }
 
   public void setCache(boolean cache) {
@@ -66,13 +65,13 @@ public class MustacheProperties {
   }
 
   public MimeType getContentType() {
-    if (this.contentType.getCharset() == null) {
+    if (contentType.getCharset() == null) {
       Map<String, String> parameters = new LinkedHashMap<>();
-      parameters.put("charset", this.charset.name());
-      parameters.putAll(this.contentType.getParameters());
-      return new MimeType(this.contentType, parameters);
+      parameters.put("charset", charset.name());
+      parameters.putAll(contentType.getParameters());
+      return new MimeType(contentType, parameters);
     }
-    return this.contentType;
+    return contentType;
   }
 
   public void setContentType(MimeType contentType) {
@@ -80,11 +79,11 @@ public class MustacheProperties {
   }
 
   public Charset getCharset() {
-    return this.charset;
+    return charset;
   }
 
   public String getCharsetName() {
-    return (this.charset != null) ? this.charset.name() : null;
+    return (charset != null) ? charset.name() : null;
   }
 
   public void setCharset(Charset charset) {
@@ -92,7 +91,7 @@ public class MustacheProperties {
   }
 
   public String getRequestContextAttribute() {
-    return this.requestContextAttribute;
+    return requestContextAttribute;
   }
 
   public void setRequestContextAttribute(String requestContextAttribute) {
@@ -100,7 +99,7 @@ public class MustacheProperties {
   }
 
   public boolean isExposeRequestAttributes() {
-    return this.exposeRequestAttributes;
+    return exposeRequestAttributes;
   }
 
   public void setExposeRequestAttributes(boolean exposeRequestAttributes) {
@@ -108,7 +107,7 @@ public class MustacheProperties {
   }
 
   public boolean isExposeSessionAttributes() {
-    return this.exposeSessionAttributes;
+    return exposeSessionAttributes;
   }
 
   public void setExposeSessionAttributes(boolean exposeSessionAttributes) {
@@ -116,7 +115,7 @@ public class MustacheProperties {
   }
 
   public boolean isAllowRequestOverride() {
-    return this.allowRequestOverride;
+    return allowRequestOverride;
   }
 
   public void setAllowRequestOverride(boolean allowRequestOverride) {
@@ -124,7 +123,7 @@ public class MustacheProperties {
   }
 
   public boolean isAllowSessionOverride() {
-    return this.allowSessionOverride;
+    return allowSessionOverride;
   }
 
   public void setAllowSessionOverride(boolean allowSessionOverride) {
@@ -132,7 +131,7 @@ public class MustacheProperties {
   }
 
   public boolean isExposeSpringMacroHelpers() {
-    return this.exposeSpringMacroHelpers;
+    return exposeSpringMacroHelpers;
   }
 
   public void setExposeSpringMacroHelpers(boolean exposeSpringMacroHelpers) {
@@ -140,7 +139,7 @@ public class MustacheProperties {
   }
 
   public String getPrefix() {
-    return this.prefix;
+    return prefix;
   }
 
   public void setPrefix(String prefix) {
@@ -148,32 +147,10 @@ public class MustacheProperties {
   }
 
   public String getSuffix() {
-    return this.suffix;
+    return suffix;
   }
 
   public void setSuffix(String suffix) {
     this.suffix = suffix;
-  }
-
-  /**
-   * Apply the given properties to a {@link AbstractTemplateViewResolver}.
-   *
-   * @param viewResolver the resolver to apply the properties to.
-   */
-  void applyToMvcViewResolver(AbstractTemplateViewResolver viewResolver) {
-    viewResolver.setPrefix(getPrefix());
-    viewResolver.setSuffix(getSuffix());
-    viewResolver.setCache(isCache());
-    if (getContentType() != null) {
-      viewResolver.setContentType(getContentType().toString());
-    }
-    viewResolver.setViewNames(getViewNames());
-    viewResolver.setExposeRequestAttributes(isExposeRequestAttributes());
-    viewResolver.setAllowRequestOverride(isAllowRequestOverride());
-    viewResolver.setAllowSessionOverride(isAllowSessionOverride());
-    viewResolver.setExposeSessionAttributes(isExposeSessionAttributes());
-    viewResolver.setExposeSpringMacroHelpers(isExposeSpringMacroHelpers());
-    viewResolver.setRequestContextAttribute(getRequestContextAttribute());
-    viewResolver.setOrder(Ordered.LOWEST_PRECEDENCE - 5);
   }
 }

@@ -13,7 +13,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.view.AbstractTemplateView;
 
-/** Spring MVC {@link View} using the Mustache template engine. */
+/** Spring MVC {@link View} using the mustache.java template engine. */
 public class MustacheView extends AbstractTemplateView {
 
   private MustacheFactory factory;

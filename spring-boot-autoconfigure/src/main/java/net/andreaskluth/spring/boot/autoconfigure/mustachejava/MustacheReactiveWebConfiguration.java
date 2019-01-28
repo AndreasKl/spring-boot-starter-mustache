@@ -1,7 +1,7 @@
 package net.andreaskluth.spring.boot.autoconfigure.mustachejava;
 
 import com.github.mustachejava.MustacheFactory;
-import net.andreaskluth.spring.boot.web.servlet.view.MustacheViewResolver;
+import net.andreaskluth.spring.boot.web.reactive.result.view.MustacheViewResolver;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication.Type;

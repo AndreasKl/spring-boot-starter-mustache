@@ -23,7 +23,20 @@ class MustacheServletWebConfiguration {
   @ConditionalOnMissingBean
   public MustacheViewResolver mustacheViewResolver(MustacheFactory mustacheFactory) {
     MustacheViewResolver resolver = new MustacheViewResolver(mustacheFactory);
-    mustacheProperties.applyToMvcViewResolver(resolver);
+    resolver.setPrefix(mustacheProperties.getPrefix());
+    resolver.setSuffix(mustacheProperties.getSuffix());
+    resolver.setCache(mustacheProperties.isCache());
+    if (mustacheProperties.getContentType() != null) {
+      resolver.setContentType(mustacheProperties.getContentType().toString());
+    }
+    resolver.setViewNames(mustacheProperties.getViewNames());
+    resolver.setExposeRequestAttributes(mustacheProperties.isExposeRequestAttributes());
+    resolver.setAllowRequestOverride(mustacheProperties.isAllowRequestOverride());
+    resolver.setAllowSessionOverride(mustacheProperties.isAllowSessionOverride());
+    resolver.setExposeSessionAttributes(mustacheProperties.isExposeSessionAttributes());
+    resolver.setExposeSpringMacroHelpers(mustacheProperties.isExposeSpringMacroHelpers());
+    resolver.setRequestContextAttribute(mustacheProperties.getRequestContextAttribute());
+    resolver.setOrder(Ordered.LOWEST_PRECEDENCE - 5);
     resolver.setCharset(mustacheProperties.getCharsetName());
     resolver.setOrder(Ordered.LOWEST_PRECEDENCE - 10);
     return resolver;

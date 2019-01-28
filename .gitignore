@@ -24,6 +24,7 @@ hs_err_pid*
 
 # All target folder
 */target/*
+target/*
 
 # IDE specific
 .idea/
